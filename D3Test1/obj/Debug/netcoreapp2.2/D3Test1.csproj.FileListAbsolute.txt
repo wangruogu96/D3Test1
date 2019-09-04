@@ -28,4 +28,3 @@ C:\Users\ruogu\source\repos\D3Test1\D3Test1\obj\Debug\netcoreapp2.2\D3Test1.Razo
 C:\Users\ruogu\source\repos\D3Test1\D3Test1\obj\Debug\netcoreapp2.2\D3Test1.RazorTargetAssemblyInfo.cs
 C:\Users\ruogu\source\repos\D3Test1\D3Test1\obj\Debug\netcoreapp2.2\D3Test1.Views.pdb
 C:\Users\ruogu\source\repos\D3Test1\D3Test1\obj\Debug\netcoreapp2.2\D3Test1.csproj.CopyComplete
-C:\Users\ruogu\source\repos\D3Test1\D3Test1\obj\Debug\netcoreapp2.2\Razor\Pages\Legacy1.g.cshtml.cs

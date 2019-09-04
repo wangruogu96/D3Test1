@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <p class="a"> </p>
+    <p class="b"> </p>
+    <p class="a"> </p>
+
+    <p>
+        <b> </b>
+    </p>
+
+    <div>
+        <input type="checkbox" name="fruit" id="apple">Apple
+        <input type="checkbox" name="fruit" id="orange">Orange
+        <input type="checkbox" name="fruit" id="banana">Banana
+    </div>
+
+    <div class="table">   </div>
+
+    <div id="chart" class="chart">    </div>
+
+    <script>
+        //d3.selectAll(".a").append("div").style("color", "blue").html("Hello!");
+        const matrix = [
+            [11975, 5871, 8916, 2868],
+            [1951, 10048, 2060, 6171],
+            [8010, 16145, 8090, 8045],
+            [1013, 990, 940, 6907]
+        ];
+
+        var dataset = [2, 4, 8, 15, 23];
+
+        d3.selectAll("p")
+            .append("div")
+            .html("Hello!")
+            .attr("width", 100)
+            .attr("height", 50)
+            .style("color", "snow")
+            .style("background-color", "grey")
+            .append("svg")
+            .attr("width", 200)
+            .attr("height", 50)
+            .append("g")
+            .attr("transform", "translate(20, 20)");
+        //d3.selectAll("p").select(".b").html("Hola");
+        d3.selectAll("p.b")
+            .html("Hi")
+            .on("click", function () {
+                d3.select(this).style("color", function (value = this.style.color) {
+                    if (value == "red")
+                        return "black";
+                    else
+                        return "red";
+                });
+            }); //when use value in function we need define it
+        //d3.selectAll("div").html("Nihao"); //d3 could change the content of element
+
+        d3.selectAll("p")
+            .select("b")
+            .html("Hi");
+
+        d3.selection.prototype.checked = function (value) {
+            return arguments.length < 1
+                ? this.property("checked")
+                : this.property("checked", !!value);
+        };
+        d3.selectAll("input[type=checkbox]").checked(true);
+
+        d3.select(".table")
+            .append("table")
+            .selectAll("tr")
+            .data(matrix)
+            .join("tr")
+            .selectAll("td")
+            .data(d => d)
+            .join("td")
+            .text(d => d);
+
+        d3.select(".chart")
+            .selectAll("div")
+            .data(dataset)
+            .enter()
+            .append("div")
+            .style("width", function (d) { return d * 10 + "px"; })
+            .text(function (d) { return d; });
+    </script>
+
+    <script>
+        const matrix = [
+            [11975, 5871, 8916, 2868],
+            [1951, 10048, 2060, 6171],
+            [8010, 16145, 8090, 8045],
+            [1013, 990, 940, 6907]
+        ];
+
+        var tr = d3.select("body")
+            .append("table")
+            .selectAll("tr")
+            .data(matrix)
+            .enter().append("tr");
+
+        var td = tr.selectAll("td")
+            .data(function (d) { return d; })
+            .enter().append("td")
+            .text(function (d) { return d; });
+    </script>
+
+    <div class="car">
+        <div id="Ford"></div>
+        <div id="Jarrah"></div>
+        <div id="Kwon"></div>
+        <div id="Locke"></div>
+        <div id="Reyes"></div>
+        <div id="Shephard"></div>
+    </div>
+
+    <div class="barchart">  </div>
+
+    <script>
+        var bardata = [2, 4, 8, 15, 16, 23, 46];
+
+        const cardata = [
+            { name: "Locke", number: 4 },
+            { name: "Reyes", number: 8 },
+            { name: "Ford", number: 15 },
+            { name: "Jarrah", number: 16 },
+            { name: "Shephard", number: 23 },
+            { name: "Kwon", number: 42 }
+        ];
+
+        d3.select(".car").selectAll("div")
+            .data(cardata, function (d) { return d ? d.name : this.id; })
+            .text(d => d.number + " " + d.name);
+
+        d3.select(".barchart")
+            .selectAll("div")
+            .data(bardata)
+            .enter().append("div")
+            .style("background", "skyblue")
+            .style("width", function (d) { return d * 10 + "px"; })
+            .text(function (d) { return d; });
+    </script>
+
+    <div class="barchart">  </div>
+
+    <div class="barchart2">
+        <div id="4"></div>
+        <div id="2"></div>
+        <div id="8"></div>
+        <div id="16"></div>
+        <div id="32"></div>
+    </div>
+
+    <script>
+        var bardata = [2, 4, 8, 15, 16, 23, 46];
+
+        var barchart2 = [32, 16, 8, 4, 2];
+
+        var barchart2_1 = [16, 8, 2, 1];
+
+        //enter() to add new elements so that number of elements equals to data
+        d3.select(".barchart")
+            .selectAll("div")
+            .data(bardata)
+            .enter().append("div")
+            .style("background", "skyblue")
+            .style("width", function (d) { return d * 10 + "px"; })
+            .text(function (d) { return d; });
+
+        //just bound data with elements when they are equal in number
+        var barchart2 = d3.select(".barchart2")
+            .selectAll("div")
+            .data(barchart2, function (d) { return d ? d : this.id; })
+            .style("width", function (d) { return d * 10 + "px"; })
+            .style("background", "pink")
+            .text(function (d) { return d; });
+
+        //exit().remove() to remove unbounded elements
+        barchart2 = barchart2.data(barchart2_1, function (d) { return d; });
+        barchart2.enter().append("div")
+            .style("width", function (d) { return d * 10 + "px"; })
+            .sort(this.id)
+            .style("background", "pink")
+            .text(function (d) { return d; });
+        barchart2.exit().remove();
+    </script>
+
+</body>
+</html>
